@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import Cardlist from "./Cardlist"
+import Searchbox from "./Searchbox"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Component } from "react";
+
+class App extends Component{
+    constructor(){
+        super();
+        this.state={
+            Robots:[],
+            Searchtext:""
+        }
+        console.log("constructor")
+    }
+
+    componentDidMount(){
+        
+        console.log('Componentdidmount');
+        //getting users from an API 
+        //and using setstate() to update Robots
+        //storing users in Robots of the state
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response=>{
+           return response.json();
+        }).then(users=>{
+            this.setState({Robots:users});
+        });
+    
+
+    }
+
+    onSearchchange=(event)=>{
+
+        this.setState({Searchtext:event.target.value})
+        console.log("onsearchchange");
+    }
+    
+    
+
+    render(){
+        console.log("render");
+        const filteredrobots=this.state.Robots.filter(robots=>{
+            return robots.name.toLowerCase().includes(this.state.Searchtext.toLowerCase());
+        })
+
+        if(this.state.Robots.length===0){
+            return(<h1 className="tc">Loading</h1>)
+        }else{
+        return(
+            <div className="tc">
+                <h1>RoboFriends</h1>
+                <Searchbox searchchange={this.onSearchchange}/>  
+                <Cardlist robots= {filteredrobots}/>
+            </div>    );}
+    }
 }
+
 
 export default App;
