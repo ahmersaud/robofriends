@@ -1,7 +1,7 @@
-import Cardlist from "./Cardlist"
-import Searchbox from "./Searchbox"
-import Scroll from "./Scroll";
-import ErrorBoundary from "./ErrorBoundary";
+import Cardlist from "../Components/Cardlist"
+import Searchbox from "../Components/Searchbox"
+import Scroll from "../Components/Scroll";
+import ErrorBoundary from "../Components/ErrorBoundary";
 
 import { Component } from "react";
 

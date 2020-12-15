@@ -4,7 +4,7 @@ import './index.css';
 
 import "tachyons";
 
-import App from "./App"
+import App from "./Containers/App"
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
